@@ -1,0 +1,138 @@
+<title>QuantumMapleQC - Page Personnelle</title>
+<style>
+    body {
+        font-family: 'Courier New', monospace;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+    #content {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #aaa;
+    }
+    h1 {
+        font-size: 2em;
+        border-bottom: 1px solid #aaa;
+    }
+    h2 {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+    p {
+        line-height: 1.6;
+        margin: 10px 0;
+    }
+    .infobox {
+        float: right;
+        width: 200px;
+        border: 1px solid #aaa;
+        background: #f0f0f0;
+        padding: 10px;
+        margin-left: 20px;
+    }
+    footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.9em;
+        color: #666;
+    }
+    .clear {
+        clear: both;
+    }
+    .maple-leaf {
+        width: 30px;
+        height: auto;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    .space-thoughts {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f0f8ff;
+        border: 1px solid #aaa;
+    }
+    .did-you-know {
+        color: red;
+        font-size: 1.5em;
+    }
+</style>
+
+<div id="content">
+    <h1><img src="maple-leaf.png" alt="Feuille d'érable" class="maple-leaf">QuantumMapleQC</h1>
+
+    <div>
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('fr')">Français</button>
+    </div>
+
+    <!-- English Version -->
+    <div id="english" class="lang-section">
+        <div class="infobox">
+            <h3>Information</h3>
+            <p><strong>Gender:</strong> He/Him</p>
+            <p><strong>Location:</strong> Canada</p>
+            <p><strong>City:</strong> Quebec</p>
+        </div>
+
+        <h2>Projects</h2>
+        <a href="polaris.html">Polaris Linux</a>
+        <a href="status.html">Laptop Status</a>
+
+        <h2>Career</h2>
+        <p>Following graduation, QuantumMapleQC began [his/her/their] career in [Industry/Field]. [He/She/They] has worked for [notable companies or organizations] and has contributed to [key projects or initiatives].</p>
+
+        <h2>Personal Life</h2>
+        <p>dude that's personal :< </p>
+
+        <div class="space-thoughts">
+            <p class="did-you-know">Did You Know?</p>
+            <p>It's beautiful to see the little platforms in the universe.</p>
+        </div>
+    </div>
+
+    <!-- French Version -->
+    <div id="french" class="lang-section" style="display: none;">
+        <div class="infobox">
+            <h3>Informations</h3>
+            <p><strong>Genre:</strong> He/Him</p>
+            <p><strong>Emplacement:</strong> Canada</p>
+            <p><strong>Ville:</strong> Québec</p>
+        </div>
+
+        <h2>Projets</h2>
+        <a href="polaris.html">Polaris Linux</a><br>
+        <a href="status.html">Statut de l'Ordinateur Portable</a>
+
+        <h2>Carrière</h2>
+        <p>Après avoir obtenu son diplôme, QuantumMapleQC a commencé sa carrière dans [Secteur]. [Il/Elle/Ils] a travaillé pour [entreprises ou organisations notables] et a contribué à [projets ou initiatives clés].</p>
+
+        <h2>Vie Personnelle</h2>
+        <p>Hé, c'est personnel :< </p>
+
+        <div class="space-thoughts">
+            <p class="did-you-know">Saviez-vous ?</p>
+            <p>C'est beau de voir les petites plateformes dans l'univers.</p>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<footer>
+    <p>&copy; [Year] QuantumMapleQC. Tous droits réservés.</p>
+</footer>
+
+<script>
+    function setLanguage(lang) {
+        if (lang === 'fr') {
+            document.getElementById('english').style.display = 'none';
+            document.getElementById('french').style.display = 'block';
+        } else {
+            document.getElementById('english').style.display = 'block';
+            document.getElementById('french').style.display = 'none';
+        }
+    }
+</script>
