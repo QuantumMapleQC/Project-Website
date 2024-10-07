@@ -1,131 +1,223 @@
-<title>QuantumMapleQC</title>
-<style>
-    body {
-        font-family: 'Courier New', monospace;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 0;
-    }
-    #content {
-        width: 80%;
-        margin: auto;
-        padding: 20px;
-        background-color: #ffffff;
-        border: 1px solid #aaa;
-    }
-    h1 {
-        font-size: 2em;
-        border-bottom: 1px solid #aaa;
-    }
-    h2 {
-        font-size: 1.5em;
-        margin-top: 20px;
-    }
-    p {
-        line-height: 1.6;
-        margin: 10px 0;
-    }
-    .infobox {
-        float: right;
-        width: 200px;
-        border: 1px solid #aaa;
-        background: #f0f0f0;
-        padding: 10px;
-        margin-left: 20px;
-    }
-    footer {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 0.9em;
-        color: #666;
-    }
-    .clear {
-        clear: both;
-    }
-    .maple-leaf {
-        width: 30px;
-        height: auto;
-        margin-right: 8px;
-        vertical-align: middle;
-    }
-    .space-thoughts {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f0f8ff;
-        border: 1px solid #aaa;
-    }
-    .did-you-know {
-        color: red;
-        font-size: 1.5em;
-    }
-</style>
-
-<div id="content">
-    <h1><img src="maple-leaf.png" alt="Feuille d'érable" class="maple-leaf">QuantumMapleQC</h1>
-
-    <div>
-        <button onclick="setLanguage('en')">English</button>
-        <button onclick="setLanguage('fr')">Français</button>
-    </div>
-
-    <div id="english" class="lang-section">
-        <div class="infobox">
-            <h3>Information</h3>
-            <p><strong>Gender:</strong> He/Him</p>
-            <p><strong>Location:</strong> Canada</p>
-            <p><strong>City:</strong> Quebec</p>
-        </div>
-
-        <a href=":3.html">Other</a>
-
-        <h2>Career</h2>
-        <p>yeah i dont know bro</p>
-
-        <h2>Personal Life</h2>
-        <p>dude that's personal :< </p>
-
-        <div class="space-thoughts">
-            <p class="did-you-know">Did You Know?</p>
-            <p>It's beautiful to see the little platforms in the universe.</p>
-        </div>
-    </div>
-
-    <div id="french" class="lang-section" style="display: none;">
-        <div class="infobox">
-            <h3>Informations</h3>
-            <p><strong>Genre:</strong> He/Him</p>
-            <p><strong>Emplacement:</strong> Canada</p>
-            <p><strong>Ville:</strong> Québec</p>
-        </div>
-
-        <h2>Projets</h2>
-        <a href="polaris.html">Polaris Linux</a><br>
-        <h2>Carrière</h2>
-        
-        <h2>Vie Personnelle</h2>
-        <p>Hé, c'est personnel :< </p>
-
-        <div class="space-thoughts">
-            <p class="did-you-know">Saviez-vous ?</p>
-            <p>C'est beau de voir les petites plateformes dans l'univers.</p>
-        </div>
-    </div>
-
-    <div class="clear"></div>
-</div>
-
-<footer>
-    <p>&copy; [Year] QuantumMapleQC. Tous droits réservés.</p>
-</footer>
-
-<script>
-    function setLanguage(lang) {
-        if (lang === 'fr') {
-            document.getElementById('english').style.display = 'none';
-            document.getElementById('french').style.display = 'block';
-        } else {
-            document.getElementById('english').style.display = 'block';
-            document.getElementById('french').style.display = 'none';
+<html>
+<head>
+    <title>QuantumMapleQC</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f6f6f6;
+            margin: 0;
+            padding: 0;
+            color: #202122;
         }
-    }
-</script>
+        #header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 5px 10px; /* Reduced padding */
+            display: flex;
+            align-items: center;
+        }
+        #header img {
+            width: 30px;
+            height: auto;
+            margin-right: 5px; /* Reduced margin */
+        }
+        #header button {
+            font-size: 1.2em; /* Smaller font size */
+            margin: 0;
+            background: none;
+            border: none;
+            color: #0a0a0a;
+            cursor: pointer;
+            padding: 4px 6px; /* Reduced padding */
+        }
+        #language-switcher {
+            margin-left: auto;
+        }
+        #language-switcher button {
+            margin-left: 5px;
+            padding: 4px 6px; /* Reduced padding */
+            border: 1px solid #a2a9b1;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 0.9em; /* Smaller font size */
+        }
+        #language-switcher button.active {
+            background-color: #e2e6ea;
+            font-weight: bold;
+        }
+        #content {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #0a0a0a;
+        }
+        h1 {
+            font-size: 2em;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        h1 img {
+            margin-right: 10px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 20px;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 5px;
+        }
+        p {
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .infobox {
+            float: right;
+            width: 200px;
+            border: 1px solid #a2a9b1;
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 0 0 10px 20px;
+        }
+        .infobox h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+        }
+        footer {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 0.9em;
+            color: #6a737d;
+        }
+        .clear {
+            clear: both;
+        }
+        .space-thoughts {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border: 1px solid #a2a9b1;
+        }
+        .did-you-know {
+            color: #d73a49;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .infobox {
+                float: none;
+                width: 100%;
+                margin: 10px 0;
+            }
+            #header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            #language-switcher {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <img src="maple-leaf.png" alt="Maple Leaf Icon">
+        <button onclick="location.href=':3.html'">QuantumMapleQC</button>
+        <div id="language-switcher">
+            <button onclick="setLanguage('en')" class="active" id="btn-en">English</button>
+            <button onclick="setLanguage('fr')" id="btn-fr">Français</button>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="english" class="lang-section">
+            <div class="infobox">
+                <h3>Information</h3>
+                <p><strong>Pronouns:</strong> she/they</p>
+                <p><strong>Location:</strong> Canada</p>
+                <p><strong>City:</strong> Quebec</p>
+            </div>
+
+            <h2>The Story Behind QuantumMapleQC</h2>
+            <p>So back in May I had the idea to have a unique name that's also showing myself as a fellow Canadian person who loves to program and build stuff or make servers.</p>
+
+            <p>Since I was stupid enough to have no idea in mind, I asked ChatGPT to make me a name that's related to that!</p>
+
+            <h2>Career</h2>
+            <p>I’m a total L4D2 addict and a programming nerd.</p>
+            
+            <h2>Personal Life</h2>
+            <p>Dude, that's personal.</p>
+
+            <div class="space-thoughts">
+                <p class="did-you-know">Did You Know?</p>
+                <p>It's fascinating to explore how quantum entanglement can revolutionize communication systems.</p>
+            </div>
+        </div>
+
+        <div id="french" class="lang-section" style="display: none;">
+            <div class="infobox">
+                <h3>Informations</h3>
+                <p><strong>Pronoms:</strong> elle/iel</p>
+                <p><strong>Emplacement:</strong> Canada</p>
+                <p><strong>Ville:</strong> Québec</p>
+            </div>
+        
+            <h2>L'histoire de QuantumMapleQC</h2>
+            <p>Alors, en mai dernier, j'ai eu l'idée d'avoir un nom unique qui montre que je suis aussi une personne canadienne qui aime programmer, construire des choses ou créer des serveurs.</p>
+        
+            <p>Comme j'étais assez perdu et n'avais aucune idée en tête, j'ai demandé à ChatGPT de me créer un nom qui soit lié à cela!</p>
+        
+            <h2>Carrière</h2>
+            <p>Je suis un total addict de L4D2 et un nerd de la programmation.</p>
+            
+            <h2>Vie Personnelle</h2>
+            <p>Eh bien, ça, c'est personnel.</p>
+        
+            <div class="space-thoughts">
+                <p class="did-you-know">Saviez-vous ?</p>
+                <p>Il est fascinant d'explorer comment l'intrication quantique peut révolutionner les systèmes de communication.</p>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <script>
+        function setLanguage(lang) {
+            const englishSection = document.getElementById('english');
+            const frenchSection = document.getElementById('french');
+            const btnEn = document.getElementById('btn-en');
+            const btnFr = document.getElementById('btn-fr');
+
+            if (lang === 'fr') {
+                englishSection.style.display = 'none';
+                frenchSection.style.display = 'block';
+                btnFr.classList.add('active');
+                btnEn.classList.remove('active');
+            } else {
+                englishSection.style.display = 'block';
+                frenchSection.style.display = 'none';
+                btnEn.classList.add('active');
+                btnFr.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
