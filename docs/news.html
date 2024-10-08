@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Announcement</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            color: #000;
+        }
+
+        a {
+            color: #0000cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #header {
+            background-color: #c0c0c0;
+            padding: 10px;
+            border-bottom: 2px solid #666;
+            text-align: center;
+        }
+
+        #header img {
+            height: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        #header h1 {
+            font-size: 24px;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        #nav {
+            text-align: center;
+            background-color: #d0d0d0;
+            padding: 10px 0;
+            border-top: 2px solid #666;
+            border-bottom: 2px solid #666;
+        }
+
+        #nav a {
+            margin: 0 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        #content {
+            width: 70%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 2px solid #666;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: #333;
+            border-bottom: 1px solid #666;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+
+        .section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        #footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        #announcement-form {
+            margin-top: 20px;
+            border: 1px solid #666;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        #announcement-form textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            border: 1px solid #666;
+            padding: 5px;
+            resize: none;
+        }
+
+        #announcement-form input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        #announcement-form input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            border: 1px solid #666;
+        }
+
+        #announcement-form input[type="submit"] {
+            background-color: #0000cc;
+            color: white;
+            border: 1px solid #666;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        #announcement-form input[type="submit"]:hover {
+            background-color: #000099;
+        }
+
+        #recent-announcements {
+            margin-top: 20px;
+        }
+
+        .dev-role {
+            color: blue;
+            /* Change to rainbow below */
+            font-weight: bold;
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% {
+                color: red;
+            }
+
+            14% {
+                color: orange;
+            }
+
+            28% {
+                color: yellow;
+            }
+
+            42% {
+                color: green;
+            }
+
+            57% {
+                color: blue;
+            }
+
+            71% {
+                color: indigo;
+            }
+
+            85% {
+                color: violet;
+            }
+
+            100% {
+                color: red;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header">
+        <img src="maple-leaf.png" alt="Logo">
+        <h1>QuantumMapleQC</h1>
+    </div>
+
+    <div id="nav">
+        <a href="index.html">Home</a>
+        <a href="onthisday.html">On This Day</a>
+        <a href="featured.html">Featured Article</a>
+    </div>
+
+    <div id="content">
+        <div class="section">
+            <h2>Announcements</h2>
+            <p>Use the form below to add a new announcement anonymously.</p>
+            <form id="announcement-form" action="#" method="post" enctype="multipart/form-data">
+                <input type="text" id="username" placeholder="Enter your name..." required>
+                <textarea placeholder="Write your announcement here..." required></textarea>
+                <input type="file" name="file" accept="*/*">
+                <input type="submit" value="Add Announcement">
+            </form>
+        </div>
+        <div class="section" id="recent-announcements">
+            <h2>Recent Announcements</h2>
+            <p id="announcement-message">No announcements yet. Use the form above to add one!</p>
+        </div>
+    </div>
+
+    <div id="footer">
+        <p>Powered by Classic Wiki Clone &copy; 2024</p>
+    </div>
+
+    <script>
+        const form = document.getElementById('announcement-form');
+        const announcementMessage = document.getElementById('announcement-message');
+        let announcements = JSON.parse(localStorage.getItem('announcements')) || []; // Load announcements from localStorage
+        const devName = 'QuantumMapleQC'; // Your real name
+        let sessionActive = true; // Flag to track session state
+
+        // Load existing announcements on page load
+        window.onload = function () {
+            displayAnnouncements();
+        };
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const announcementText = form.querySelector('textarea').value;
+
+            // Check for impersonation
+            if (username.toLowerCase() !== devName.toLowerCase() && username.toLowerCase() === devName.toLowerCase()) {
+                alert("Impersonation detected! You will be logged out.");
+                timeoutSession();
+                return;
+            }
+
+            const announcement = {
+                username: username,
+                text: announcementText,
+                date: new Date(),
+                isDev: username.toLowerCase() === devName.toLowerCase()
+            };
+
+            announcements.push(announcement);
+            localStorage.setItem('announcements', JSON.stringify(announcements)); // Save announcements to localStorage
+            displayAnnouncements();
+            form.reset();
+        });
+
+        function displayAnnouncements() {
+            if (announcements.length > 0) {
+                announcementMessage.innerHTML = announcements.map((ann, index) => `
+                    <div>
+                        <strong class="${ann.isDev ? 'dev-role' : ''}">${ann.isDev ? 'DEV: ' : ''}${ann.username}:</strong>
+                        <p>${ann.text}</p>
+                        <small>${new Date(ann.date).toLocaleString()}</small>
+                        ${ann.isDev ? `<button onclick="removeAnnouncement(${index})">Remove</button>` : ''}
+                    </div>
+                `).join('');
+            } else {
+                announcementMessage.innerHTML = 'No announcements yet. Use the form above to add one!';
+            }
+        }
+
+        function removeAnnouncement(index) {
+            announcements.splice(index, 1);
+            localStorage.setItem('announcements', JSON.stringify(announcements)); // Update localStorage
+            displayAnnouncements();
+        }
+
+        function timeoutSession() {
+            sessionActive = false; // Set the session as inactive
+            alert("Your session has been timed out due to suspicious activity.");
+            announcementMessage.innerHTML = '<p>Your session has been terminated.</p>'; // Show a message on the page
+            form.reset(); // Clear the form
+        }
+    </script>
+
+</body>
+
+</html>
