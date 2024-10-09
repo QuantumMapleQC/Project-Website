@@ -191,7 +191,6 @@
         <a href="news.html">In the News</a>
         <a href="onthisday.html">On This Day</a>
         <a href="featured.html">Featured Article</a>
-        <a href="announcements.html">Announcements</a>
     </div>
 
     <div id="content">
@@ -219,7 +218,7 @@
         const form = document.getElementById('announcement-form');
         const announcementMessage = document.getElementById('announcement-message');
         let announcements = JSON.parse(localStorage.getItem('announcements')) || []; // Load announcements from localStorage
-        const devName = 'QuantumMapleQC'; // Your real name
+        const devName = 'QuantumMapleQC'; // ORIGINAL OWNER
 
         // Load existing announcements on page load
         window.onload = function () {
