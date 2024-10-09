@@ -4,56 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcements</title>
+    <title>QuantumMapleQC Announcements</title>
     <style>
         body {
-            font-family: "Times New Roman", serif;
-            background-color: #e0e0e0;
+            font-family: "Arial", sans-serif;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
             color: #000;
         }
 
-        a {
-            color: #0000cc;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
         #header {
             background-color: #c0c0c0;
             padding: 10px;
-            border-bottom: 2px solid #666;
             text-align: center;
-        }
-
-        #header img {
-            height: 50px;
-            vertical-align: middle;
-            margin-right: 10px;
         }
 
         #header h1 {
-            font-size: 24px;
             margin: 0;
-            font-weight: normal;
-        }
-
-        #nav {
-            text-align: center;
-            background-color: #d0d0d0;
-            padding: 10px 0;
-            border-top: 2px solid #666;
-            border-bottom: 2px solid #666;
-        }
-
-        #nav a {
-            margin: 0 10px;
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 24px;
         }
 
         #content {
@@ -61,70 +30,77 @@
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
-            border: 2px solid #666;
+            border: 1px solid #666;
+            border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        .section {
+        .announcement {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .announcement img,
+        .announcement video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .reply {
+            margin-left: 20px;
+            border-left: 2px solid #ccc;
+            padding: 10px;
+        }
+
+        .form-section {
             margin-bottom: 20px;
-        }
-
-        .section h2 {
-            font-size: 20px;
-            color: #333;
-            border-bottom: 1px solid #666;
-            padding-bottom: 5px;
-            margin-top: 0;
-        }
-
-        #footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #777;
         }
 
         #announcement-form {
             margin-top: 20px;
-            border: 1px solid #666;
-            padding: 10px;
-            background-color: #f9f9f9;
         }
 
+        #announcement-form input[type="text"],
         #announcement-form textarea {
             width: 100%;
-            height: 100px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            border: 1px solid #666;
             padding: 5px;
-            resize: none;
+            margin: 5px 0;
+            border: 1px solid #666;
         }
 
-        #announcement-form input[type="text"] {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            border: 1px solid #666;
+        #announcement-form input[type="file"] {
+            margin: 10px 0;
         }
 
         #announcement-form input[type="submit"] {
-            background-color: #0000cc;
+            background-color: #007bff;
             color: white;
-            border: 1px solid #666;
+            border: none;
             padding: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
             font-weight: bold;
         }
 
         #announcement-form input[type="submit"]:hover {
-            background-color: #000099;
+            background-color: #0056b3;
         }
 
-        #recent-announcements {
-            margin-top: 20px;
+        .banned-message {
+            color: red;
+            font-weight: bold;
+        }
+
+        .developer {
+            color: red;
+            font-weight: bold;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #banned-message {
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -132,86 +108,122 @@
 <body>
 
     <div id="header">
-        <img src="maple-leaf.png" alt="Logo">
-        <h1>QuantumMapleQC</h1>
-    </div>
-
-    <div id="nav">
-        <a href="index.html">Home</a>
-        <a href="news.html">In the News</a>
-        <a href="onthisday.html">On This Day</a>
-        <a href="featured.html">Featured Article</a>
+        <h1>QuantumMapleQC Announcements</h1>
     </div>
 
     <div id="content">
-        <div class="section">
-            <h2>Announcements</h2>
-            <p>Use the form below to add a new announcement anonymously.</p>
+        <div class="form-section">
+            <h2>Add an Announcement</h2>
             <form id="announcement-form" onsubmit="addAnnouncement(event)">
                 <input type="text" id="username" placeholder="Enter your name..." required>
                 <textarea id="announcement" placeholder="Write your announcement here..." required></textarea>
+                <input type="file" id="file-input" accept="image/*,video/*">
                 <input type="submit" value="Add Announcement">
             </form>
+            <div id="banned-message"></div>
         </div>
-        <div class="section" id="recent-announcements">
-            <h2>Recent Announcements</h2>
-            <p id="announcement-message">No announcements yet. Use the form above to add one!</p>
-        </div>
-    </div>
 
-    <div id="footer">
-        <p>Powered by Classic Wiki Clone &copy; 2024</p>
+        <div id="announcements"></div>
     </div>
 
     <script>
         const form = document.getElementById('announcement-form');
-        const announcementMessage = document.getElementById('announcement-message');
+        const announcementsDiv = document.getElementById('announcements');
+        const bannedMessageDisplay = document.getElementById('banned-message');
         const storageKey = 'announcements';
+        const bannedUsersKey = 'bannedUsers';
+        const developerUsername = 'QuantumMapleQC';
 
-        // Load existing announcements on page load
         window.onload = function () {
             displayAnnouncements();
-            setInterval(displayAnnouncements, 2000); // Poll every 2 seconds
         };
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const username = document.getElementById('username').value.trim();
             const announcementText = document.getElementById('announcement').value;
+            const fileInput = document.getElementById('file-input');
 
-            if (username.length > 0) {
-                const announcement = {
-                    username: username,
-                    text: announcementText,
-                    date: new Date(),
-                };
-                const announcements = JSON.parse(localStorage.getItem(storageKey)) || [];
-                announcements.push(announcement);
-                localStorage.setItem(storageKey, JSON.stringify(announcements));
-                displayAnnouncements();
-                form.reset();
-            } else {
-                alert("You cannot impersonate others.");
+            if (isUserBanned(username)) {
+                bannedMessageDisplay.innerHTML = `<span class="banned-message">${username} has been banned. You can't use that name!</span>`;
+                return;
             }
+
+            const announcement = {
+                username,
+                text: announcementText,
+                date: new Date(),
+                replies: [],
+                file: fileInput.files[0] ? URL.createObjectURL(fileInput.files[0]) : null,
+            };
+
+            const announcements = JSON.parse(localStorage.getItem(storageKey)) || [];
+            announcements.push(announcement);
+            localStorage.setItem(storageKey, JSON.stringify(announcements));
+            displayAnnouncements();
+            form.reset();
+            bannedMessageDisplay.innerHTML = ''; // Clear any banned messages
         });
 
         function displayAnnouncements() {
             const announcements = JSON.parse(localStorage.getItem(storageKey)) || [];
-            if (announcements.length > 0) {
-                announcementMessage.innerHTML = announcements.map(ann => `
-                    <div>
-                        <strong>${ann.username}:</strong>
-                        <p>${ann.text}</p>
-                        <small>${new Date(ann.date).toLocaleString()}</small>
+            announcementsDiv.innerHTML = announcements.map((ann, index) => `
+                <div class="announcement">
+                    <strong class="${ann.username === developerUsername ? 'developer' : ''}">${ann.username}:</strong>
+                    <p>${ann.text}</p>
+                    ${ann.file ? (ann.file.endsWith('.mp4') ? `<video controls src="${ann.file}"></video>` : `<img src="${ann.file}" alt="Uploaded content">`) : ''}
+                    <button onclick="toggleReplyForm(${index})">Reply</button>
+                    <div class="reply" id="reply-form-${index}" style="display: none;">
+                        <textarea placeholder="Write your reply here..."></textarea>
+                        <button onclick="addReply(${index})">Add Reply</button>
                     </div>
-                `).join('');
-            } else {
-                announcementMessage.innerHTML = 'No announcements yet. Use the form above to add one!';
+                    <div>${displayReplies(ann.replies)}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleReplyForm(index) {
+            const replyForm = document.getElementById(`reply-form-${index}`);
+            replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function addReply(index) {
+            const replyText = document.querySelector(`#reply-form-${index} textarea`).value;
+            const announcements = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+            if (replyText.trim() !== '') {
+                announcements[index].replies.push({
+                    username: 'Anonymous',
+                    text: replyText,
+                    date: new Date(),
+                });
+                localStorage.setItem(storageKey, JSON.stringify(announcements));
+                displayAnnouncements();
             }
         }
+
+        function displayReplies(replies) {
+            if (replies.length === 0) return '';
+
+            return replies.map(reply => `
+                <div class="reply">
+                    <strong>${reply.username}:</strong>
+                    <p>${reply.text}</p>
+                    <small>${new Date(reply.date).toLocaleString()}</small>
+                </div>
+            `).join('');
+        }
+
+        function isUserBanned(username) {
+            const bannedUsers = JSON.parse(localStorage.getItem(bannedUsersKey)) || [];
+            return bannedUsers.includes(username);
+        }
+
+        // Add additional functions for banning and removing comments as needed...
     </script>
 </body>
 </html>
+
 
 
 </body>
