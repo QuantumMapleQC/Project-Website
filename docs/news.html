@@ -106,10 +106,6 @@
             resize: none;
         }
 
-        #announcement-form input[type="file"] {
-            margin-bottom: 10px;
-        }
-
         #announcement-form input[type="text"] {
             width: 100%;
             padding: 5px;
@@ -138,43 +134,19 @@
 
         .dev-role {
             color: blue;
-            /* Change to rainbow below */
             font-weight: bold;
             animation: rainbow 2s linear infinite;
         }
 
         @keyframes rainbow {
-            0% {
-                color: red;
-            }
-
-            14% {
-                color: orange;
-            }
-
-            28% {
-                color: yellow;
-            }
-
-            42% {
-                color: green;
-            }
-
-            57% {
-                color: blue;
-            }
-
-            71% {
-                color: indigo;
-            }
-
-            85% {
-                color: violet;
-            }
-
-            100% {
-                color: red;
-            }
+            0% { color: red; }
+            14% { color: orange; }
+            28% { color: yellow; }
+            42% { color: green; }
+            57% { color: blue; }
+            71% { color: indigo; }
+            85% { color: violet; }
+            100% { color: red; }
         }
     </style>
 </head>
@@ -200,7 +172,6 @@
             <form id="announcement-form" onsubmit="addAnnouncement(event)">
                 <input type="text" id="username" placeholder="Enter your name..." required>
                 <textarea id="announcement" placeholder="Write your announcement here..." required></textarea>
-                <input type="file" name="file" accept="*/*">
                 <input type="submit" value="Add Announcement">
             </form>
         </div>
@@ -217,12 +188,11 @@
     <script>
         const form = document.getElementById('announcement-form');
         const announcementMessage = document.getElementById('announcement-message');
-        let announcements = JSON.parse(localStorage.getItem('announcements')) || []; // Load announcements from localStorage
-        const devName = 'QuantumMapleQC'; // ORIGINAL OWNER
 
         // Load existing announcements on page load
         window.onload = function () {
             displayAnnouncements();
+            setInterval(displayAnnouncements, 2000); // Poll every 2 seconds
         };
 
         form.addEventListener('submit', function (e) {
@@ -230,53 +200,35 @@
             const username = document.getElementById('username').value.trim();
             const announcementText = document.getElementById('announcement').value;
 
-            // Check for impersonation
-            if (username.toLowerCase() === devName.toLowerCase()) {
+            if (username.length > 0) {
                 const announcement = {
                     username: username,
                     text: announcementText,
                     date: new Date(),
-                    isDev: true
                 };
+                const announcements = JSON.parse(localStorage.getItem('announcements')) || [];
                 announcements.push(announcement);
-                localStorage.setItem('announcements', JSON.stringify(announcements)); // Save announcements to localStorage
-            } else if (username.length > 0) {
-                const announcement = {
-                    username: username,
-                    text: announcementText,
-                    date: new Date(),
-                    isDev: false
-                };
-                announcements.push(announcement);
-                localStorage.setItem('announcements', JSON.stringify(announcements)); // Save announcements to localStorage
+                localStorage.setItem('announcements', JSON.stringify(announcements));
+                displayAnnouncements();
+                form.reset();
             } else {
                 alert("You cannot impersonate others.");
-                return;
             }
-
-            displayAnnouncements();
-            form.reset();
         });
 
         function displayAnnouncements() {
+            const announcements = JSON.parse(localStorage.getItem('announcements')) || [];
             if (announcements.length > 0) {
-                announcementMessage.innerHTML = announcements.map((ann, index) => `
+                announcementMessage.innerHTML = announcements.map(ann => `
                     <div>
-                        <strong class="${ann.isDev ? 'dev-role' : ''}">${ann.isDev ? 'DEV: ' : ''}${ann.username}:</strong>
+                        <strong>${ann.username}:</strong>
                         <p>${ann.text}</p>
                         <small>${new Date(ann.date).toLocaleString()}</small>
-                        ${ann.isDev ? `<button onclick="removeAnnouncement(${index})">Remove</button>` : ''}
                     </div>
                 `).join('');
             } else {
                 announcementMessage.innerHTML = 'No announcements yet. Use the form above to add one!';
             }
-        }
-
-        function removeAnnouncement(index) {
-            announcements.splice(index, 1);
-            localStorage.setItem('announcements', JSON.stringify(announcements)); // Update localStorage
-            displayAnnouncements();
         }
     </script>
 
