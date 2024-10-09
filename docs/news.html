@@ -132,22 +132,6 @@
             margin-top: 20px;
         }
 
-        .dev-role {
-            color: blue;
-            font-weight: bold;
-            animation: rainbow 2s linear infinite;
-        }
-
-        @keyframes rainbow {
-            0% { color: red; }
-            14% { color: orange; }
-            28% { color: yellow; }
-            42% { color: green; }
-            57% { color: blue; }
-            71% { color: indigo; }
-            85% { color: violet; }
-            100% { color: red; }
-        }
     </style>
 </head>
 
@@ -188,6 +172,7 @@
     <script>
         const form = document.getElementById('announcement-form');
         const announcementMessage = document.getElementById('announcement-message');
+        const storageKey = 'announcements';
 
         // Load existing announcements on page load
         window.onload = function () {
@@ -206,9 +191,9 @@
                     text: announcementText,
                     date: new Date(),
                 };
-                const announcements = JSON.parse(localStorage.getItem('announcements')) || [];
+                const announcements = JSON.parse(localStorage.getItem(storageKey)) || [];
                 announcements.push(announcement);
-                localStorage.setItem('announcements', JSON.stringify(announcements));
+                localStorage.setItem(storageKey, JSON.stringify(announcements));
                 displayAnnouncements();
                 form.reset();
             } else {
@@ -217,7 +202,7 @@
         });
 
         function displayAnnouncements() {
-            const announcements = JSON.parse(localStorage.getItem('announcements')) || [];
+            const announcements = JSON.parse(localStorage.getItem(storageKey)) || [];
             if (announcements.length > 0) {
                 announcementMessage.innerHTML = announcements.map(ann => `
                     <div>
