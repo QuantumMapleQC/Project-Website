@@ -7,8 +7,8 @@
     <title>QuantumMapleQC Announcements</title>
     <style>
         body {
-            font-family: "Arial", sans-serif;
-            background-color: #f0f0f0;
+            font-family: "Times New Roman", serif;
+            background-color: #e0e0e0;
             margin: 0;
             padding: 0;
             color: #000;
@@ -17,12 +17,13 @@
         #header {
             background-color: #c0c0c0;
             padding: 10px;
+            border-bottom: 2px solid #666;
             text-align: center;
         }
 
         #header h1 {
-            margin: 0;
             font-size: 24px;
+            margin: 0;
         }
 
         #content {
@@ -30,8 +31,7 @@
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
-            border: 1px solid #666;
-            border-radius: 5px;
+            border: 2px solid #666;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         }
 
@@ -52,12 +52,11 @@
             padding: 10px;
         }
 
-        .form-section {
-            margin-bottom: 20px;
-        }
-
         #announcement-form {
             margin-top: 20px;
+            border: 1px solid #666;
+            padding: 10px;
+            background-color: #f9f9f9;
         }
 
         #announcement-form input[type="text"],
@@ -73,16 +72,16 @@
         }
 
         #announcement-form input[type="submit"] {
-            background-color: #007bff;
+            background-color: #0000cc;
             color: white;
-            border: none;
+            border: 1px solid #666;
             padding: 10px;
             cursor: pointer;
             font-weight: bold;
         }
 
         #announcement-form input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #000099;
         }
 
         .banned-message {
@@ -97,11 +96,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        #banned-message {
-            color: red;
-            font-weight: bold;
-        }
     </style>
 </head>
 
@@ -112,9 +106,9 @@
     </div>
 
     <div id="content">
-        <div class="form-section">
+        <div id="announcement-form">
             <h2>Add an Announcement</h2>
-            <form id="announcement-form" onsubmit="addAnnouncement(event)">
+            <form onsubmit="addAnnouncement(event)">
                 <input type="text" id="username" placeholder="Enter your name..." required>
                 <textarea id="announcement" placeholder="Write your announcement here..." required></textarea>
                 <input type="file" id="file-input" accept="image/*,video/*">
@@ -138,7 +132,7 @@
             displayAnnouncements();
         };
 
-        form.addEventListener('submit', function (e) {
+        form.onsubmit = function (e) {
             e.preventDefault();
             const username = document.getElementById('username').value.trim();
             const announcementText = document.getElementById('announcement').value;
@@ -163,7 +157,7 @@
             displayAnnouncements();
             form.reset();
             bannedMessageDisplay.innerHTML = ''; // Clear any banned messages
-        });
+        };
 
         function displayAnnouncements() {
             const announcements = JSON.parse(localStorage.getItem(storageKey)) || [];
@@ -173,7 +167,7 @@
                     <p>${ann.text}</p>
                     ${ann.file ? (ann.file.endsWith('.mp4') ? `<video controls src="${ann.file}"></video>` : `<img src="${ann.file}" alt="Uploaded content">`) : ''}
                     <button onclick="toggleReplyForm(${index})">Reply</button>
-                    <div class="reply" id="reply-form-${index}" style="display: none;">
+                    <div class="reply-form" id="reply-form-${index}" style="display: none;">
                         <textarea placeholder="Write your reply here..."></textarea>
                         <button onclick="addReply(${index})">Add Reply</button>
                     </div>
@@ -218,14 +212,6 @@
             const bannedUsers = JSON.parse(localStorage.getItem(bannedUsersKey)) || [];
             return bannedUsers.includes(username);
         }
-
-        // Add additional functions for banning and removing comments as needed...
     </script>
 </body>
-</html>
-
-
-
-</body>
-
 </html>
