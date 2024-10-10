@@ -38,16 +38,27 @@
             margin-top: 20px;
         }
         img {
-            width: 444px;
-            height: auto;
+            width: 444px; /* Set a specific width for the image */
+            height: auto; /* Maintain aspect ratio */
             border: 2px solid #888;
             border-radius: 8px;
-            animation: fade-in 0.5s;
+            animation: fade-in 0.5s; /* Animation for fading in */
         }
 
+        /* Fade-in animation */
         @keyframes fade-in {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* Animation for status change */
+        .status-updated {
+            animation: highlight 0.5s; /* Animation for highlighting the status */
+        }
+
+        @keyframes highlight {
+            from { background-color: #444; }
+            to { background-color: #555; }
         }
 
         .icon {
@@ -56,8 +67,8 @@
         }
 
         hr {
-            border: 1px solid #888;
-            margin: 10px 0;
+            border: 1px solid #888; /* Style for the horizontal line */
+            margin: 10px 0; /* Space around the line */
         }
     </style>
 </head>
@@ -68,16 +79,17 @@
     <p id="internet"><i class="fas fa-wifi icon"></i><span id="internetStatus">Checking connection...</span></p>
     <p id="battery"><i class="fas fa-battery-half icon"></i><span id="batteryStatus">Checking battery...</span></p>
     
-    <hr>
+    <hr> <!-- Horizontal line added here -->
 
     <p id="status">Status: loading...</p>
+    <p id="uptime">Uptime: loading...</p>
 </div>
 
 <footer>
     <img src="20241005_162403_HDR.jpg" alt="A classic image" />
 </footer>
 
-<audio id="statusSound" src="status-update.mp3" preload="auto"></audio>
+<audio id="statusSound" src="status-update.mp3" preload="auto"></audio> <!-- Add your sound file here -->
 
 <script>
     let lastStatus = null;
@@ -87,10 +99,24 @@
             const response = await fetch('/status');
             const data = await response.json();
             
-            // Update status box
+            // Check for status change
+            if (lastStatus !== data.online) {
+                lastStatus = data.online;
+
+                // Play sound effect
+                const sound = document.getElementById('statusSound');
+                sound.play();
+
+                // Animate status box
+                const statusBox = document.getElementById('statusBox');
+                statusBox.classList.add('status-updated');
+                setTimeout(() => statusBox.classList.remove('status-updated'), 500); // Remove animation class
+            }
+
             document.getElementById('status').innerText = `Status: ${data.online ? 'Online' : 'Offline'}`;
-            document.getElementById('batteryStatus').innerText = `${data.battery.percent}%`;
+            document.getElementById('uptime').innerText = `Uptime: ${data.uptime}`;
             document.getElementById('internetStatus').innerText = data.internet ? 'Connected' : 'Not Connected';
+            document.getElementById('batteryStatus').innerText = data.battery ? 'Connected' : 'Not Connected';
 
         } catch (error) {
             console.error('Error fetching status:', error);
@@ -103,4 +129,3 @@
 
 </body>
 </html>
-
