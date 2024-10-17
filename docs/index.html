@@ -1,190 +1,142 @@
 <html>
 <head>
-    <title>QuantumMapleQC</title>
+
+    <title>lmao</title>
     <style>
+        /* Base Styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f6f6f6; /* Light mode background */
+            background-color: #E8E8E8;
+            color: #333;
             margin: 0;
             padding: 0;
-            color: #202122; /* Light mode text color */
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-        }
-        body.dark-mode {
-            background-color: #1e1e1e; /* Dark mode background */
-            color: #ffffff; /* Dark mode text color */
+            font-size: 0.9em; /* Smaller font size */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Center vertically */
         }
         #header {
-            background-color: #ffffff; /* Light mode header */
-            border-bottom: 1px solid #a2a9b1;
-            padding: 5px 10px; /* Reduced padding */
+            background-color: #4B4B4B;
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #888;
+            font-size: 1.3em;
+            width: 100%;
+            color: white;
+        }
+        #container {
+            width: 800px; /* Main container width */
+            padding: 10px;
+            background-color: #D0D0D0;
+            border: 1px solid #888;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: auto; /* Change to auto to fit content */
+            margin: 0; /* Remove spacing */
+        }
+        #context {
             display: flex;
             align-items: center;
+            margin-bottom: 20px;
+            flex-grow: 1; /* Allow context to take available space */
         }
-        body.dark-mode #header {
-            background-color: #2a2a2a; /* Dark mode header */
-            border-bottom: 1px solid #444; /* Dark mode border */
-        }
-        #header img {
-            width: 30px;
+        #context img {
+            width: 100px; /* Set image size */
             height: auto;
-            margin-right: 5px; /* Reduced margin */
+            margin-right: 10px; /* Space between image and text */
         }
-        #header button {
-            font-size: 1.2em; /* Smaller font size */
-            margin: 0;
-            background: none;
-            border: none;
-            color: #0a0a0a; /* Light mode button text color */
-            cursor: pointer;
-            padding: 4px 6px; /* Reduced padding */
+        #language-buttons {
+            text-align: left; /* Align buttons to the left */
+            margin-bottom: 10px; /* Space below buttons */
         }
-        body.dark-mode #header button {
-            color: #ffffff; /* Dark mode button text color */
+        .lang-btn {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #0066CC;
         }
-        #language-switcher {
-            margin-left: auto;
-        }
-        #language-switcher button {
-            margin-left: 5px;
-            padding: 4px 6px; /* Reduced padding */
-            border: 1px solid #a2a9b1;
-            background-color: #f8f9fa; /* Light mode button background */
-            cursor: pointer;
-            border-radius: 3px;
-            font-size: 0.9em; /* Smaller font size */
-        }
-        body.dark-mode #language-switcher button {
-            background-color: #3a3a3a; /* Dark mode button background */
-            border-color: #444; /* Dark mode border color */
-            color: #ffffff; /* Dark mode button text color */
-        }
-        #language-switcher button.active {
-            background-color: #e2e6ea; /* Active button light mode */
-            font-weight: bold;
-        }
-        body.dark-mode #language-switcher button.active {
-            background-color: #4a4a4a; /* Active button dark mode */
-        }
-        #content {
-            max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff; /* Light mode content background */
-            border: 1px solid #a2a9b1;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            transition: background-color 0.3s, border-color 0.3s; /* Smooth transition */
-        }
-        body.dark-mode #content {
-            background-color: #2a2a2a; /* Dark mode content background */
-            border-color: #444; /* Dark mode border color */
-        }
-        h1, h2, h3 {
-            color: #0a0a0a; /* Light mode heading color */
-        }
-        body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
-            color: #ffffff; /* Dark mode heading color */
-        }
-        /* Other styles remain unchanged */
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .infobox {
-                float: none;
-                width: 100%;
-                margin: 10px 0;
-            }
-            #header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            #language-switcher {
-                margin-left: 0;
-                margin-top: 10px;
-            }
+        #footer {
+            text-align: center;
+            padding: 8px;
+            background-color: #4B4B4B;
+            color: white;
+            border-top: 1px solid #888;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <div id="header">
-        <img src="maple-leaf.png" alt="Maple Leaf Icon">
-        <button onclick="location.href=':3.html'">QuantumMapleQC</button>
-        <div id="language-switcher">
-            <button onclick="setLanguage('en')" class="active" id="btn-en">English</button>
-            <button onclick="setLanguage('fr')" id="btn-fr">Français</button>
+<div id="img">
+    <img src="QuantumMapleQC.png" alt="icon" style="width: 450px; height: auto;"> <!-- Set smaller width -->
+</div>
+
+<div id="container">
+    <div id="context">
+        <img src="ipodix.png" alt="Context Image">
+        <div>
+            <p>This is the Power of Linux on an iPod Classic</p>
+            <p>IPODIX is a new project I have been lately working on, which is literally Alpine OS on the iPod.</p>
+            <p>This website is made in 
+                <a href="https://www.java.com/en/" alt="java" style="color: blue; text-decoration: underline;">Java</a>, 
+                <a href="https://www.w3.org/TR/html52/" alt="html" style="color: blue; text-decoration: underline;">HTML</a>, and 
+                <a href="https://www.w3.org/Style/CSS/" alt="css" style="color: blue; text-decoration: underline;">CSS</a>.
+            </p>
         </div>
-        <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
     </div>
+    
 
-    <div id="content">
-        <!-- Content remains unchanged -->
-        <div id="english" class="lang-section">
-            <div class="infobox">
-                <h3>Information</h3>
-                <p><strong>Pronouns:</strong> she/they</p>
-                <p><strong>Location:</strong> Canada</p>
-                <p><strong>City:</strong> Quebec</p>
-            </div>
-            <h2>The Story Behind QuantumMapleQC</h2>
-            <p>So back in May I had the idea to have a unique name that's also showing myself as a fellow Canadian person who loves to program and build stuff or make servers.</p>
-            <p>Since I was stupid enough to have no idea in mind, I asked ChatGPT to make me a name that's related to that!</p>
-            <h2>Career</h2>
-            <p>I’m a total L4D2 addict and a programming nerd.</p>
-            <h2>Personal Life</h2>
-            <p>Dude, that's personal.</p>
-            <div class="space-thoughts">
-                <p class="did-you-know">Did You Know?</p>
-                <p>It's fascinating to explore how quantum entanglement can revolutionize communication systems.</p>
-            </div>
-        </div>
-
-        <div id="french" class="lang-section" style="display: none;">
-            <div class="infobox">
-                <h3>Informations</h3>
-                <p><strong>Pronoms:</strong> elle/iel</p>
-                <p><strong>Emplacement:</strong> Canada</p>
-                <p><strong>Ville:</strong> Québec</p>
-            </div>
-            <h2>L'histoire de QuantumMapleQC</h2>
-            <p>Alors, en mai dernier, j'ai eu l'idée d'avoir un nom unique qui montre que je suis aussi une personne canadienne qui aime programmer, construire des choses ou créer des serveurs.</p>
-            <p>Comme j'étais assez perdu et n'avais aucune idée en tête, j'ai demandé à ChatGPT de me créer un nom qui soit lié à cela!</p>
-            <h2>Carrière</h2>
-            <p>Je suis un total addict de L4D2 et un nerd de la programmation.</p>
-            <h2>Vie Personnelle</h2>
-            <p>Eh bien, ça, c'est personnel.</p>
-            <div class="space-thoughts">
-                <p class="did-you-know">Saviez-vous ?</p>
-                <p>Il est fascinant d'explorer comment l'intrication quantique peut révolutionner les systèmes de communication.</p>
-            </div>
-        </div>
-
-        <div class="clear"></div>
+    <div id="language-buttons">
+        <a href="#" class="lang-btn" onclick="changeLanguage('english')">English</a>
+        <a href="#" class="lang-btn" onclick="changeLanguage('french')">Français</a>
+        <a href="#" class="lang-btn" onclick="changeLanguage('russian')">Русский</a>
     </div>
+</div>
 
-    <script>
-        function setLanguage(lang) {
-            const englishSection = document.getElementById('english');
-            const frenchSection = document.getElementById('french');
-            const btnEn = document.getElementById('btn-en');
-            const btnFr = document.getElementById('btn-fr');
 
-            if (lang === 'fr') {
-                englishSection.style.display = 'none';
-                frenchSection.style.display = 'block';
-                btnFr.classList.add('active');
-                btnEn.classList.remove('active');
-            } else {
-                englishSection.style.display = 'block';
-                frenchSection.style.display = 'none';
-                btnEn.classList.add('active');
-                btnFr.classList.remove('active');
+
+<script>
+    function changeLanguage(lang) {
+        const content = {
+            english: {
+                welcome: "Welcome",
+                details: "This website was created to share knowledge and resources about programming and technology."
+            },
+            french: {
+                welcome: "Bienvenue",
+                details: "Ce site Web a été créé pour partager des connaissances et des ressources sur la programmation et la technologie."
+            },
+            russian: {
+                welcome: "Добро пожаловать",
+                details: "Этот веб-сайт был создан для обмена знаниями и ресурсами по программированию и технологиям."
             }
-        }
+        };
 
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-    </script>
+        const details = {
+            english: [
+                "This is the Power of Linux on an iPod Classic",
+                "IPODIX is a new project I have been lately working on, which is literally Alpine OS on the iPod.",
+                "This website is made in <a href='https://www.java.com/en/' alt='java' style='color: blue; text-decoration: underline;'>Java</a>, <a href='https://www.w3.org/TR/html52/' alt='html' style='color: blue; text-decoration: underline;'>HTML</a>, and <a href='https://www.w3.org/Style/CSS/' alt='css' style='color: blue; text-decoration: underline;'>CSS</a>."
+            ],
+            french: [
+                "C'est la puissance de Linux sur un iPod Classic",
+                "IPODIX est un nouveau projet sur lequel je travaille dernièrement, qui est littéralement Alpine OS sur l'iPod.",
+                "Ce site Web est fait en <a href='https://www.java.com/en/' alt='java' style='color: blue; text-decoration: underline;'>Java</a>, <a href='https://www.w3.org/TR/html52/' alt='html' style='color: blue; text-decoration: underline;'>HTML</a>, et <a href='https://www.w3.org/Style/CSS/' alt='css' style='color: blue; text-decoration: underline;'>CSS</a>."
+            ],
+            russian: [
+                "Это мощь Linux на iPod Classic",
+                "IPODIX — это новый проект, над которым я в последнее время работал, который на самом деле является Alpine OS на iPod.",
+                "Этот веб-сайт создан на <a href='https://www.java.com/en/' alt='java' style='color: blue; text-decoration: underline;'>Java</a>, <a href='https://www.w3.org/TR/html52/' alt='html' style='color: blue; text-decoration: underline;'>HTML</a> и <a href='https://www.w3.org/Style/CSS/' alt='css' style='color: blue; text-decoration: underline;'>CSS</a>."
+            ]
+        };
+
+        document.querySelector('#context p:nth-of-type(1)').textContent = details[lang][0];
+        document.querySelector('#context p:nth-of-type(2)').textContent = details[lang][1];
+        document.querySelector('#context p:nth-of-type(3)').innerHTML = details[lang][2]; // Use innerHTML to include links
+    }
+</script>
+
 </body>
 </html>
+
